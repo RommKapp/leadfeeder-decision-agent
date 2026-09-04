@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leadfeeder investigation chat</title>
+    <script
+      async
+      src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
+    ></script>
+    <style>
+      html,
+      body,
+      main,
+      openai-chatkit {
+        block-size: 100%;
+        inline-size: 100%;
+        margin: 0;
+      }
+
+      openai-chatkit {
+        display: block;
+      }
+
+      #connection-status {
+        inset-block-end: 1rem;
+        inset-inline: 1rem;
+        pointer-events: none;
+        position: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <openai-chatkit id="chatkit"></openai-chatkit>
+      <p id="connection-status" aria-live="polite" role="status" hidden></p>
+    </main>
+
+    <script>
+      (async () => {
+        await customElements.whenDefined("openai-chatkit");
+
+        const chatkit = document.getElementById("chatkit");
+        const status = document.getElementById("connection-status");
+
+        if (!chatkit || typeof chatkit.setOptions !== "function") {
+          status.hidden = false;
+          status.textContent = "Chat is unavailable. Reload the page and try again.";
+          return;
+        }
+
+        chatkit.setOptions({
+          api: {
+            url: "/chatkit",
+            domainKey: "local-dev",
+          },
+          initialThread: null,
+          history: {
+            enabled: false,
+          },
+          composer: {
+            attachments: {
+              enabled: false,
+            },
+          },
+        });
+
+        chatkit.addEventListener("chatkit.error", () => {
+          status.hidden = false;
+          status.textContent =
+            "The chat connection is unavailable. Reconnect it in Codex, then try again.";
+        });
+
+        chatkit.addEventListener("chatkit.response.start", () => {
+          status.hidden = false;
+          status.textContent = "Response in progress.";
+        });
+
+        chatkit.addEventListener("chatkit.response.end", () => {
+          status.hidden = true;
+          status.textContent = "";
+        });
+      })();
+    </script>
+  </body>
+</html>

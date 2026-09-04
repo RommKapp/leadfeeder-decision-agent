@@ -1,0 +1,28 @@
+{
+  "fixture_label": "LOCAL_TEST_FIXTURE — not Leadfeeder evidence",
+  "fictional_non_pii": true,
+  "fixture_version": "3.0",
+  "policy_files": ["policies/ICP.md","policies/OFFER.md","policies/OUTREACH.md","policies/TOOLS.md"],
+  "owners": {
+    "page_selection_pagination_batching":"leadfeeder-decision-orchestrator",
+    "normalization_provenance":"leadfeeder-evidence",
+    "score_coverage_null_score":"leadfeeder-icp-scoring",
+    "validation_repair":"leadfeeder-rubric",
+    "decision_full_set_ranking":"leadfeeder-recommendation"
+  },
+  "forbidden_policy_terms":["page_url is","half_up(","coverage_pct =","criterion_id","max_points","assessable_weight","score_band","HIGH_FIT","next_stage","next_cursor","page_count","batch_size","ranking_scope","stop_reason","decision mapping","DATE_RANGE_TOO_BROAD","FULL_DEDUPLICATED_SET","LIMIT_REACHED"],
+  "required_skill_terms": {
+    "leadfeeder-decision-orchestrator":["mandatory","pagination","batch"],
+    "leadfeeder-evidence":["provenance","UNKNOWN","qualifying_commercial_visit_id","qualifying_canonical_public_url"],
+    "leadfeeder-icp-scoring":["total_score","NONE"],
+    "leadfeeder-rubric":["repair"],
+    "leadfeeder-recommendation":["FULL_DEDUPLICATED_SET","ranking","qualifying_commercial_visit_id","qualifying_canonical_public_url"]
+  },
+  "unique_owner_terms": {
+    "leadfeeder-decision-orchestrator":["page_count","next_cursor","up to two times"],
+    "leadfeeder-evidence":["NO_NORMALIZABLE_EVIDENCE","UNRESOLVED_FIELD_MEANING"],
+    "leadfeeder-icp-scoring":["floor((earned_points","B2C_ONLY"],
+    "leadfeeder-rubric":["RECALCULATE_SCORE","CORRECT_CONTRACT"],
+    "leadfeeder-recommendation":["decision priority","NO_ACTION_DISQUALIFIER"]
+  }
+}

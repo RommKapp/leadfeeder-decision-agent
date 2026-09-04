@@ -1,0 +1,44 @@
+approval_policy = "never"
+sandbox_mode = "read-only"
+web_search = "disabled"
+
+[features]
+apps = false
+plugins = false
+browser_use = false
+computer_use = false
+
+[agents]
+enabled = false
+
+[apps._default]
+enabled = false
+destructive_enabled = false
+open_world_enabled = false
+
+[mcp_servers.leadfeeder]
+url = "https://mcp.leadfeeder.com/mcp"
+auth = "oauth"
+enabled = true
+required = true
+startup_timeout_sec = 60
+tool_timeout_sec = 60
+enabled_tools = [
+  "get_account_info",
+  "usage",
+  "get_web_visits_custom_feeds",
+  "get_web_visits_custom_feed",
+  "get_web_visits_companies",
+  "search_web_visits",
+  "search_companies",
+  "match_companies",
+]
+scopes = [
+  "accounts:read",
+  "usage:read",
+  "companies:read",
+  "web_visits:read",
+]
+
+[mcp_servers.leadfeeder.oauth]
+client_id = "d3cc524e-3067-44c3-8833-5e47b3feb4e7"

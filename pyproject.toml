@@ -1,0 +1,23 @@
+[project]
+name = "leadfeeder-decision-agent"
+version = "0.1.0"
+description = "Local read-only ChatKit bridge to the project Leadfeeder workflow"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi==0.141.1",
+    "openai-chatkit==1.6.5",
+    "openai-codex==0.147.0",
+    "uvicorn==0.52.4",
+]
+
+[dependency-groups]
+dev = [
+    "httpx==0.28.1",
+    "pytest==9.1.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false
